@@ -16,7 +16,8 @@ def dashboard(request):
         return render(request, 'supervisorDashboard.html')
     else:
         # User is not a supervisor
-        return render(request, 'regularaDshboard.html')
+        return render(request, 'views/home.html', )
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -26,19 +27,26 @@ def login_view(request):
             password = login_form.cleaned_data.get('password')
 
             user = authenticate(username=username, password=password)
-            print(user)
-            if  user is not None:
+            if user is not None:
                 login(request, user)
-                messages.success(request, f'You have succesfully logged in as {username}')
-                return redirect('home')
-            else: 
-                messages.error(request, f'Unable to Log in')
+                messages.success(request, f'You have successfully logged in as {username}')
+
+                # Check if user is in 'Supervisor' group
+                if user.groups.filter(name='Supervisors').exists():
+                    # Redirect to supervisor dashboard
+                    return redirect('dashboard')
+                else:
+                    # Redirect to home page for regular users
+                    return redirect('home')
+            else:
+                messages.error(request, 'Unable to log in')
         else:
-            messages.error(request, f'An error occured trying while trying to log in')
-    elif request.method == 'GET':
-        login_form =AuthenticationForm()
+            messages.error(request, 'An error occurred while trying to log in')
+    else:
+        login_form = AuthenticationForm()
     
     return render(request, 'views/login.html', {'login_form': login_form})
+
 
 @login_required
 def logout_view(request):

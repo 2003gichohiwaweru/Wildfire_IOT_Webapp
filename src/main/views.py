@@ -9,3 +9,7 @@ def main_view(request):
 @login_required
 def home_view(request):
     return render(request, "views/home.html", {},)
+
+@login_required
+def dashboard_view(request):
+    return render(request, "supervisor/dashboard.html", {},)
