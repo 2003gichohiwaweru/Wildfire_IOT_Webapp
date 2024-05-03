@@ -1,0 +1,71 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+{% block 'title'%}
+
+<title>WILDFIRE LIMITED</title>
+
+{% endblock%}
+
+{% block 'body' %}
+
+  <main>
+    <section class=" py-3 container px-4"> 
+        <!--
+        <div class="row py-lg-5 ">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">GMAX</h1>
+                <p class="text-muted lead">The best place to buy and sell
+                    second hand cars. Gmax made it that easy
+                </p>
+                <a href="" class="btn btn-outline-danger my-2">List your Car</a>
+            </div>
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <form method="get" > 
+                    {{ listing_filter.form|crispy}}
+                    <button class="btn btn-outline-danger mt-3 " type ="submit">Submit</button>
+
+                </form>
+            </div>
+           
+        <div>
+        -->
+
+    </section>
+ 
+{% endblock %}
+{% block 'footer' %}
+<div class="container bg-dark py-4 mt-5">
+    <div class="row">
+        <!-- First Column: Logo and Name -->
+        <div class="col-md-4 text-center">
+            <img class="mb-2" src="{% static 'images/logo.png' %}" width="32" height="32" alt="Logo">
+            <p class="text-white">WildFire Limited</p>
+        </div>
+        
+        <!-- Second Column: Navigation Links -->
+        <div class="col-md-4 text-center">
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Home</a></li>
+                <li><a href="#" class="text-white">Pricing</a></li>
+                <li><a  class="text-white">Contacts</a></li>
+                <li><a  class="text-white">Brands</a></li>
+            </ul>
+        </div>
+        
+        <!-- Third Column: Social Media Icons and Email Link -->
+        <div class="col-md-4 text-center">
+            <p class="text-white">Connect with us:</p>
+            <!-- Social Media Icons -->
+            <a href="#" class="text-white me-3" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-white me-3" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-white me-3" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            <!-- Email Link -->
+            <a href="mailto:example@example.com" class="text-white"><i class="fas fa-envelope"></i> example@example.com</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
