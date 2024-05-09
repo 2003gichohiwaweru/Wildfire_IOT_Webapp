@@ -127,9 +127,7 @@ LOGIN_REDIRECT_URL = '/home/'
 LOGIN_URL = '/login/'
 
 #Message settings
-MESSAGE_TAG = {
-    messages.ERROR: 'Danger'
-}
+
 
 
 # Static files (CSS, JavaScript, Images)
