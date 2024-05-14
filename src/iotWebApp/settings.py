@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'main',
-    'users'
+    'users',
+    'visualizationapp',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
@@ -89,7 +90,8 @@ DATABASES = {
         'USER': 'JOSE',
         'PASSWORD': 'admin',
 
-    }
+    },
+
 }
 
 
