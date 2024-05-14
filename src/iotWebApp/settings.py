@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
@@ -89,7 +89,13 @@ DATABASES = {
         'NAME': 'IOT',
         'USER': 'JOSE',
         'PASSWORD': 'admin',
+       
 
+    },
+    'mongodb': {
+        'NAME': 'ioti',
+        'HOST': 'localhost',
+        'PORT': '27017',
     },
 
 }
