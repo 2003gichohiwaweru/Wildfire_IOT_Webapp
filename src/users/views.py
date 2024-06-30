@@ -84,12 +84,11 @@ def edit_profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile has been updated.')
-            return redirect('view_profile')
+            return redirect('home')
     else:
-        user_form = UserForm(instance=user)
+        
         profile_form = ProfileForm(instance=profile)
 
     return render(request, 'users/edit_profile.html', {
-        'user_form': user_form,
         'profile_form': profile_form
     })
