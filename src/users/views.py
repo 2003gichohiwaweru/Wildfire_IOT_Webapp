@@ -3,10 +3,12 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .models import Profile
 from .forms import UserForm, ProfileForm
+from main.forms import GreenhouseForm
 
 @login_required
 def dashboard(request):
@@ -67,28 +69,41 @@ class RegisterView(View):
             messages.error(request, 'An error occurred while trying to register')
             return render(request, 'views/register.html', {'register_form': register_form})
 
-@login_required
-def view_profile(request):
-    profile = get_object_or_404(Profile, user=request.user)
-    return render(request, 'views/profile.html', {'profile': profile})
 
-@login_required
-def edit_profile(request):
-    user = request.user
-    profile = get_object_or_404(Profile, user=user)
 
-    if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=user)
-        profile_form = ProfileForm(request.POST, instance=profile)
-        if user_form.is_valid() and profile_form.is_valid():
+
+
+@method_decorator(login_required, name='dispatch')
+class ProfileView(View):
+
+    def get(self, request):
+        
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+        greenhouse_form = GreenhouseForm(instance=request.user.profile.greenhouse)
+        return render(request, 'views/profile.html', {'user_form': user_form, 
+                                                      'profile_form': profile_form,
+                                                      'greenhouse_form': greenhouse_form,
+                                                      })
+    
+
+    def post(self, request):
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        greenhouse_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile.greenhouse)
+        
+        if user_form.is_valid() and profile_form.is_valid() and greenhouse_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Your profile has been updated.')
+            greenhouse_form.save()
+            messages.success(request, f'Profile Updated Successfuly')
             return redirect('home')
-    else:
-        
-        profile_form = ProfileForm(instance=profile)
 
-    return render(request, 'users/edit_profile.html', {
-        'profile_form': profile_form
-    })
+        else: 
+            messages.error(request, 'Error occured while Updating Profile')
+
+        return render(request, 'views/profile.html', {'user_form': user_form,
+                                                      'greenhouse_form': greenhouse_form, 
+                                                      'profile_form': profile_form})
+    
+

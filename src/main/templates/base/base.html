@@ -31,7 +31,7 @@
     {% block 'header' %}
     
     {% if request.user.is_authenticated %}
-    <header class=" p-2  text-white w-100 nav-masthead bg-dark ">
+    <header class=" p-2   w-100 nav-masthead bg-dark ">
         
         <div class="container" >
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -46,7 +46,10 @@
             
                 <ul class="nav col-12 col-lg-auto  me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li>
-                        <a href="" class="nav-link px-3">{{ user.username }}'s Profile</a>
+                        <a href="{% url 'profile' %}" class="nav-link px-3">{{ user.username }}'s Profile</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'home'%}" class="nav-link px-3">Home</a>
                     </li>
 
 
@@ -83,6 +86,7 @@
         {% endif %}
     </header>
     
+    
     {% endblock%}
 
     {% block 'body' %}
@@ -91,6 +95,9 @@
     
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+</body>
 </body>
 
 

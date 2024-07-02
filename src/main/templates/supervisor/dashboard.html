@@ -2,58 +2,47 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
-
-{% block 'title'%}
-
+{% block title %}
 <title>WILDFIRE LIMITED</title>
+{% endblock %}
 
-{% endblock%}
-
-{% block 'body' %}
-
-  <main>
-    <section class=" py-3 container px-2 pg-light mt-4"> 
-        
-        <div class="row py-lg-5 ">
-            <div class="col-lg-3 col-md-5 ">
+{% block body %}
+<main>
+    <section class="py-3 container px-2 pg-light mt-4">
+        <div class="row py-lg-5">
+            <div class="col-lg-3 col-md-5">
                 <div class="card bg-danger" style="width: 12rem;">
                     <div class="card-body">
-                      <p class="card-text">EMPLOYEES</p>
-                      <a href="#" class="card-link">Card link</a>
+                        <p class="card-text">EMPLOYEES</p>
+                        <a href="" class="card-link">View Employees</a>
                     </div>
-                  </div>
+                </div>
             </div>
             <div class="col-lg-3 col-md-5">
                 <div class="card bg-success" style="width: 12rem;">
                     <div class="card-body">
-                      <p class="card-text">GREENSHOUSES</p>
-                      <a href="#" class="card-link">Card link</a>
+                        <p class="card-text">GREENHOUSES</p>
+                        <a href="#" class="card-link">Card link</a>
                     </div>
                 </div>
-                
             </div>
             <div class="col-lg-3 col-md-5">
                 <div class="card bg-warning" style="width: 12rem;">
                     <div class="card-body">
-                      <p class="card-text">HUMIDITY</p>
-                      <a href="#" class="card-link">Card link</a>
+                        <p class="card-text">HUMIDITY</p>
+                        <a href="#" class="card-link">Card link</a>
                     </div>
                 </div>
-                
             </div>
             <div class="col-lg-3 col-md-5">
                 <div class="card bg-dark" style="width: 12rem;">
                     <div class="card-body">
-                      <p class="card-text">TEMPERATURES.</p>
-                      <a href="{% url 'temp'%}" class="card-link">Card link</a>
+                        <p class="card-text">TEMPERATURES</p>
+                        <a href="{% url 'temp' %}" class="card-link">Card link</a>
                     </div>
-                </div>   
+                </div>
             </div>
         </div>
-
     </section>
 </main>
-
- 
 {% endblock %}

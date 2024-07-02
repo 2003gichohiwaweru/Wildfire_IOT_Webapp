@@ -17,27 +17,19 @@
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
-                <div class="col-6 g-3">
-                    <p><strong>First Name:</strong> {{ profile.first_name }}</p>
-                    <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
-                    <p><strong>Gender:</strong> {{ profile.gender }}</p>
-                    <p><strong>Status:</strong> {{ profile.is_verified }}</p>
+                <div class="col-md-6">
+                    {{ user_form|crispy}}
+                    {{ profile_form|crispy}}
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
+                    {{ greenhouse_form|crispy}}
                     
-                    
-                    <p><strong>Last Name:</strong> {{ profile.last_name }}</p>
-                    <p><strong>Email Address:</strong> {{ profile.email_address }}</p>
-                    <p><strong>Employee Number:</strong> {{ profile.employee_number }}</p>
-                    <p><strong>Date Joined:</strong> {{ profile.date_hired }}</p>
                 </div>
                 
             </div>
+         
 
             <div class="row mt-4">
-                <div class="col text-right">
-                    <button id="edit-button" class="btn btn-outline-primary">Edit</button>
-                </div>
                 <div class="col text-right">
                     <button class="btn btn-outline-success btn-md-col align-center mt-2" type="submit" value="Submit">Save</button>
                 </div>
@@ -48,4 +40,5 @@
     
     
 </div>
+
 {% endblock %}

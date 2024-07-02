@@ -2,33 +2,96 @@
 {% load static %}
 
 
-{% block 'body' %}
 
+{% block body %}
 <div class="d-flex flex-column h-100 text-white index">
+   <main class="flex-grow-1">
+       <!-- Home Section: Image Carousel -->
+       <section id="home" class="carousel slide" data-bs-ride="carousel">
+           <div class="carousel-inner">
+               <div class="carousel-item active">
+                   <img src="{% static 'images/slide1.jpg' %}" class="d-block w-100" alt="Slide 1">
+               </div>
+               <div class="carousel-item">
+                   <img src="{% static 'images/slide2.jpg' %}" class="d-block w-100" alt="Slide 2">
+               </div>
+               <div class="carousel-item">
+                   <img src="{% static 'images/slide3.jpg' %}" class="d-block w-100" alt="Slide 3">
+               </div>
+           </div>
+           <button class="carousel-control-prev" type="button" data-bs-target="#home" data-bs-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Previous</span>
+           </button>
+           <button class="carousel-control-next" type="button" data-bs-target="#home" data-bs-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Next</span>
+           </button>
+       </section>
 
- 
-   <main class="flex-grow-1 d-flex justify-content-center align-items-center">
-       
-       <div class="w-90 text-center">
-          
-            <h2>Find the deal near you!! !</h2>
-           <p class="lead text-black">Looking to buy or sell used car? We've got <br>you 
-               covered.</br>GMAX is the leading used  car marketplace you have to be in
-           </p>
-               
-           <p class= "lead">
-               <a href="{% url 'register'%}" 
-               class=" btn btn-lg btn-outline-danger fw-bold border-white ">Register</a>
-           </p>
-          
-       </div>
+       <!-- Farm Information Section -->
+       <section id="farm-info" class="py-5 text-center bg-light text-black">
+           <div class="container">
+               <h2>About Our Farm</h2>
+               <p class="lead">Learn more about the farm and its operations...</p>
+               <!-- Add more descriptive content here -->
+           </div>
+       </section>
+
+       <!-- Image Grid Section -->
+       <section id="image-grid" class="py-5 text-center bg-dark text-white">
+           <div class="container">
+               <h2>Our Gallery</h2>
+               <div class="row">
+                   <div class="col-md-6">
+                       <div class="card bg-dark text-white">
+                           <img src="{% static 'images/farm1.jpg' %}" class="card-img-top" alt="Farm Image 1">
+                           <div class="card-body">
+                               <p class="card-text">Description of the image 1</p>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="card bg-dark text-white">
+                           <img src="{% static 'images/farm2.jpg' %}" class="card-img-top" alt="Farm Image 2">
+                           <div class="card-body">
+                               <p class="card-text">Description of the image 2</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="row mt-4">
+                   <div class="col-md-6">
+                       <div class="card bg-dark text-white">
+                           <img src="{% static 'images/farm3.jpg' %}" class="card-img-top" alt="Farm Image 3">
+                           <div class="card-body">
+                               <p class="card-text">Description of the image 3</p>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="card bg-dark text-white">
+                           <img src="{% static 'images/farm4.jpg' %}" class="card-img-top" alt="Farm Image 4">
+                           <div class="card-body">
+                               <p class="card-text">Description of the image 4</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Footer Section or Contact Section -->
+       <section id="footer" class="py-5 text-center bg-light text-black">
+           <div class="container">
+               <p class="lead">Looking to buy or sell used car? We've got you covered.</p>
+               <a href="{% url 'register' %}" class="btn btn-lg btn-outline-danger fw-bold border-white">Register</a>
+           </div>
+       </section>
    </main>
-   
-
-   
 </div>
-
 {% endblock %}
+
 {% block 'footer'%}
 <div>
    <!-- Footer section -->
