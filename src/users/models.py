@@ -16,7 +16,6 @@ class Profile(models.Model):
     gender = models.CharField(max_length=10, choices=GENDER)
     last_login = models.DateTimeField(auto_now=True)
     date_hired = models.DateField(default=timezone.now, null=True, blank=True)
-    
     is_verified = models.BooleanField(default=False)
     # Add more fields as needed
 
