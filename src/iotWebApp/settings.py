@@ -91,12 +91,7 @@ DATABASES = {
         'PASSWORD': 'admin',
        
 
-    },
-    'mongodb': {
-        'NAME': 'ioti',
-        'HOST': 'localhost',
-        'PORT': '27017',
-    },
+    }
 
 }
 

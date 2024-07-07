@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
+from main.models import Greenhouses
 from .models import Profile
 from .forms import UserForm, ProfileForm
 from main.forms import GreenhouseForm
@@ -71,39 +73,47 @@ class RegisterView(View):
 
 
 
-
-
 @method_decorator(login_required, name='dispatch')
 class ProfileView(View):
 
     def get(self, request):
-        
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
-        greenhouse_form = GreenhouseForm(instance=request.user.profile.greenhouse)
-        return render(request, 'views/profile.html', {'user_form': user_form, 
-                                                      'profile_form': profile_form,
-                                                      'greenhouse_form': greenhouse_form,
-                                                      })
-    
+        user = request.user
+        profile = user.profile
+        greenhouse = profile.greenhouses.first() if profile.greenhouses.exists() else None
 
+        user_form = UserForm(instance=user)
+        profile_form = ProfileForm(instance=profile)
+        greenhouse_form = GreenhouseForm(instance=greenhouse)
+        
+        return render(request, 'views/profile.html', {
+            'user_form': user_form, 
+            'profile_form': profile_form,
+            'greenhouse_form': greenhouse_form,
+        })
+    
     def post(self, request):
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        greenhouse_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile.greenhouse)
+        user = request.user
+        profile = user.profile
+        greenhouse = profile.greenhouses.first() if profile.greenhouses.exists() else None
+
+        user_form = UserForm(request.POST, instance=user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
+        greenhouse_form = GreenhouseForm(request.POST, request.FILES, instance=greenhouse)
         
         if user_form.is_valid() and profile_form.is_valid() and greenhouse_form.is_valid():
             user_form.save()
             profile_form.save()
-            greenhouse_form.save()
-            messages.success(request, f'Profile Updated Successfuly')
+            greenhouse_instance = greenhouse_form.save(commit=False)
+            greenhouse_instance.profile = profile  # ensure the greenhouse is linked to the profile
+            greenhouse_instance.save()
+
+            messages.success(request, 'Profile updated successfully')
             return redirect('home')
-
         else: 
-            messages.error(request, 'Error occured while Updating Profile')
+            messages.error(request, 'Error occurred while updating profile')
 
-        return render(request, 'views/profile.html', {'user_form': user_form,
-                                                      'greenhouse_form': greenhouse_form, 
-                                                      'profile_form': profile_form})
-    
-
+        return render(request, 'views/profile.html', {
+            'user_form': user_form,
+            'profile_form': profile_form,
+            'greenhouse_form': greenhouse_form,
+        })

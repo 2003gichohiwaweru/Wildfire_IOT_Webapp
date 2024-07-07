@@ -1,16 +1,10 @@
-# app/models.py
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
-from .consts import GENDER
-from main.models import Greenhouses
-
-
-
-
 import random
 import string
-from django.db import models
+
+from .consts import GENDER
 
 class Profile(models.Model):
     employee_number = models.CharField(max_length=6, unique=True, null=True, blank=True)
@@ -22,9 +16,9 @@ class Profile(models.Model):
     gender = models.CharField(max_length=10, choices=GENDER)
     last_login = models.DateTimeField(auto_now=True)
     date_hired = models.DateField(default=timezone.now, null=True, blank=True)
-    greenhouse = models.OneToOneField(Greenhouses, on_delete=models.SET_NULL, null=True, related_name='profile')
+    
     is_verified = models.BooleanField(default=False)
-    # Other fields
+    # Add more fields as needed
 
     def save(self, *args, **kwargs):
         if not self.employee_number:
